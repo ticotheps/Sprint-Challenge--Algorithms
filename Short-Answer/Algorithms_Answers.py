@@ -149,3 +149,69 @@ print(exercise_c(20))
 
 #  -PROBLEM: Write an algorithm (in English) to figure out the numerical value
 #   of floor "_f_" so you can minimize the number of eggs that are "broken".
+
+#--------------Devise a Plan---------------
+
+#-------Binary Search Approach--------
+
+#  1) First, we will subtract the numerical value of the highest floor (a variable
+#     called "max_floor") by the numerical value of the lowest floor (a variable 
+#     called "min_floor") to get a numerical value called "floor_difference".
+
+#  2) Then, we will divide this value "floor_difference" by 2 (if this value is an 
+#     odd number, round down to the nearest floor) and use this as our "drop_floor"
+#     value, where we will be dropping/throwing 3 eggs from to determine if the eggs 
+#     break or remain intact, when being dropped from that floor. 
+
+#  3) We have decided to throw/drop three total eggs (instead of just one) from each
+#     "drop_floor" to rule out any false positives or false negatives that might 
+#     occur from decreased intra-rater reliability or uncontrollable external factors 
+#     (i.e. - wind speed, inherent genetic defects of the eggs, etc.).
+
+#  4) After all three eggs are dropped, the eggs will be inspected and each will be given
+#     a numerical value of "0" to represent an intact "egg_shell_state" value or "-1"
+#     to represent a broken "egg_shell_state" value.
+
+#  5) Whichever state has more occurrences, "intact" or "broken", will determine the 
+#     numerical "egg_shell_state" value that will be associated with the numerical
+#     value of that specific floor.
+
+#  6) Then, both numerical values, will be stored in a list (in this format -->
+#     (_f_, egg_shell_state)), which is to then be stored inside of ANOTHER list called 
+#     'humpty_dumptys_important_list'.
+
+#-------Either Go to Step 7 or Step 8 to Continue--------
+
+#  7a) If the associated "egg_shell_state" of a floor was determined to be "intact", then we
+#      can safely assume that any values of "_f_" (floors) BELOW the current "drop_floor" value
+#      will NOT produce a "broken" egg_shell_state value when dropped from those floors because
+#      the acceleration of gravity near the earth (g = -9.81 m/s^2) only decreases as you move 
+#      towards the earth's surface (i.e. - moving to a lower floor in the building). However,
+#      we cannot assume much else, in terms of what eggs will do when dropped from a HIGHER floor.
+#      Therefore, we must continue testing the remaining upper half of the building's floors.
+
+#  7b) Then, our next step would be to set our "min_floor" value equal to the current "drop_floor"
+#      value +1. Then, we will determine a NEW "drop_floor" value (to test from next) by subtracting
+#      the NEW "min_floor" value from the unchanged "max_floor" value and then dividing that number 
+#      by 2.
+
+#  8a) If the associated "egg_shell_state" of a floor was determined to be "broken", then we
+#      can safely assume that any values of "_f_" (floors) ABOVE the current "drop_floor" value
+#      will ALSO produce a "broken" egg_shell_state value when dropped from those floors because
+#      the acceleration of gravity near the earth (g = -9.81 m/s^2) only increases as you move 
+#      away from the earth's surface (i.e. - moving to a higher floor in the building). However,
+#      we cannot assume much else, in terms of what eggs will do when dropped from a LOWER floor.
+#      Therefore, we must continue testing the remaining lower half of the building's floors.
+
+#  8b) Then, our next step would be to set our "max_floor" value equal to the current "drop_floor"
+#      value -1. Then, we will determine a NEW "drop_floor" value (to test from next) by subtracting
+#      the unchanged "min_floor" value from the NEW "max_floor" value and then dividing that number 
+#      by 2.
+
+#  9) From here, we will continue following the binary search approach (steps 3-8) until we produce 
+#     a DIFFERENT "egg_shell_state" value than what we produced at our initial "drop_floor" value. 
+#     This newly discovered numerical "drop_floor" value will be set to a new variable called 
+#     "game_changer_floor". 
+
+#  10) The "game_changer_floor" value will be returned at the end of the algorithm and will mark the
+#      value of "_f_" that we were originally searching for in our exercise.
