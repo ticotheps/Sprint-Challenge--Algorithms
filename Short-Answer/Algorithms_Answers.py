@@ -153,6 +153,9 @@ print(exercise_c(20))
 #--------------Devise a Plan---------------
 
 #-------Binary Search Approach--------
+#  Worst Case Run-Time Complexity: O(log n)
+#  BEST Case Run-Time Complexity: O(1)
+#  Average Case Run-Time Complexity: O(log n)
 
 #  1) First, we will subtract the numerical value of the highest floor (a variable
 #     called "max_floor") by the numerical value of the lowest floor (a variable 
