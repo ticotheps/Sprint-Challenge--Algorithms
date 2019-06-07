@@ -1,5 +1,7 @@
 #  Exercise 1:
 
+#  THE TWO CASES FOR SOLUTION 1a:
+
 #  a) i) If we are to simply return the value of "a" AFTER the execution 
 #        of the 'while' loop, then the running time complexity of this 
 #        snippet of pseudocode is "constant time" or O(1). This is because
