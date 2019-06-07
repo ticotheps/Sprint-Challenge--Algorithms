@@ -96,8 +96,40 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        #  1)  Determine if the robot's light is on, which signifies that there
+        #      are still items to be sorted.
+        
+        # print(self.light_is_on())
+        if self.light_is_on() == True:
+            #  2)  If the robot's light is on, proceed to step 4.
+            pass
+        else: 
+            #  3)  If the robot's light is NOT on, turn it on to begin sorting.
+            self.set_light_on()
+            print(self.light_is_on()) 
+            while self.light_is_on() == True:
+                #  4)  Determine if the robot can move left or right, which 
+                #      signifies where the robot is located in the list and 
+                #      whether there are still items to be sorted.
+                #  4a) If the robot can move left AND right, the robot is positioned
+                #      somewhere in the middle of the list and may continue sorting.
+                #  4b) If the robot can only move LEFT, then the robot has reached the end of
+                #      the list and can no longer sort.
+                #  4c) If the robot can only move RIGHT, this signifies that the robot
+                #      is positioned at the beginning of the list (l[0]) and may continue sorting
+                print(self.can_move_left())   
+                print(self.can_move_right())
+                
+        
+
+            
+        
+        
+
+
+        #  5)  To begin, the robot is not holding any items. At position l[0], the robot
+        #      must pick up the first item to sort it. 
+        
 
 
 if __name__ == "__main__":
