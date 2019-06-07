@@ -1,6 +1,6 @@
 #  Exercise 1:
 
-#-------------SOLUTION 1a---------------:
+#-------------SOLUTION I a---------------:
 
 #  a) If we are to simply return the value of "a" AFTER the execution 
 #     of the 'while' loop, then the running time complexity of this 
@@ -33,15 +33,15 @@ print(exercise_a(10))
 print(exercise_a(20))
 
 
-#--------------------SOLUTION 1b--------------------:
+#--------------------SOLUTION I b--------------------:
 
-#  a) i) If we are to simply return the value of "sum" AFTER executing all
-#        of the 'for' loops, then the running time complexity of this 
-#        snippet of pseudocode is "exponential time" or O(2^n). This is because
-#        as "n" increases in size (arbitrarily), the number of operations
-#        performed by this algorithm increases exponentially. Please run the
-#        following code below to see example outputs that support this
-#        hypothesis.
+#  b)  If we are to simply return the value of "sum" AFTER executing all
+#      of the 'for' loops, then the running time complexity of this 
+#      snippet of pseudocode is "exponential time" or O(2^n). This is because
+#      as "n" increases in size (arbitrarily), the number of operations
+#      performed by this algorithm increases exponentially. Please run the
+#      following code below to see example outputs that support this
+#      hypothesis.
 
 def exercise_b(n):
     sum = 0
@@ -75,7 +75,7 @@ print(exercise_b(10))
 print(exercise_b(20)) 
 
 
-#--------------------SOLUTION 1c--------------------:
+#--------------------SOLUTION I c--------------------:
 
 #  c) If we are to simply return a numerical value of "bunny ears" AFTER
 #     executing if/else statement, then the running time complexity of this 
@@ -120,3 +120,32 @@ print(exercise_c(8))
 print(exercise_c(9))   
 print(exercise_c(10))   
 print(exercise_c(20))  
+
+#--------------------SOLUTION II--------------------:
+
+#---------Understanding the Problem----------
+#  -This building has "_n_" stories.
+
+#  -A "story" is defined as 'any level part of a building that is covered
+#   by a roof and also has a floor associated with it'. It also must have the
+#   utility such that it could be used by people (for living, work, etc.).
+
+#  -This building has "_f_" floors.
+
+#  -A "floor," in this context, can be described as 'the portion of the story
+#   that people walk on'.
+
+#  -You have lots of eggs.
+
+#  -Eggs have two states, so they can be either "intact" or "broken".
+
+#  -Eggs can be dropped out of the building, from any floor.
+
+#  -An egg is considered "broken" when it is thrown/dropped from ANY floor
+#   that is HIGHER THAN or EQUAL to floor "_f_".
+
+#  -If an egg is thrown/dropped from ANY floor that is LOWER than floor "_f_",
+#   the egg will remain intact.
+
+#  -PROBLEM: Write an algorithm (in English) to figure out the numerical value
+#   of floor "_f_" so you can minimize the number of eggs that are "broken".
