@@ -72,4 +72,51 @@ print(exercise_b(7))
 print(exercise_b(8))      
 print(exercise_b(9))  
 print(exercise_b(10))  
-print(exercise_b(20))  
+print(exercise_b(20)) 
+
+
+#--------------------SOLUTION 1c--------------------:
+
+#  c) If we are to simply return a numerical value of "bunny ears" AFTER
+#     executing if/else statement, then the running time complexity of this 
+#     snippet of pseudocode is "linear time" or O(n). This is because
+#     as "n" increases in size (arbitrarily), the number of operations
+#     performed by this algorithm increases in proportion to the linear 
+#     increase of "n". Please run the following code below to see example 
+#     outputs that support this hypothesis.
+
+'''
+def bunnyEars(bunnies):
+      if bunnies == 0:
+        return 0
+
+      return 2 + bunnyEars(bunnies-1)
+'''
+#  In my example below: 
+#  bunnyEars(bunnies) = exercise_c(n)
+#  bunnies = n
+#  2 + bunnyEars(bunnies-1) => 2 + exercise_c(n-1)
+def exercise_c(n):
+    operation_counter = 0
+    if n == 0:
+        return 0
+    else:    
+        operation_counter += 1
+        ears = exercise_c(n-1)
+        ears += 2
+        
+    print(f"When n = {n}, this counts as {operation_counter} operation; and the total number of ears is now: {ears}")    
+    return ears
+  
+print("\n Example Outputs for 'exercise_c()': \n-----------------------------------")
+print(exercise_c(1))   
+print(exercise_c(2))   
+print(exercise_c(3))   
+print(exercise_c(4))   
+print(exercise_c(5))   
+print(exercise_c(6))   
+print(exercise_c(7))   
+print(exercise_c(8))   
+print(exercise_c(9))   
+print(exercise_c(10))   
+print(exercise_c(20))  
