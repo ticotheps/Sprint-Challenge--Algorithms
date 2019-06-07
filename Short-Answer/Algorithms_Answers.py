@@ -17,7 +17,7 @@ def exercise_a(n):
         operation_counter += 1
         a = a + n * n
     
-    return (f"If n = {n}; then total number of operations is: {operation_counter}")
+    return (f"If n = {n}; then the total number of operations is: {operation_counter}")
 
 print("\n Example Outputs for 'exercise_a()': \n-----------------------------------")
 print(exercise_a(1))
@@ -32,6 +32,7 @@ print(exercise_a(9))
 print(exercise_a(10))
 print(exercise_a(20))
 
+
 #--------------------SOLUTION 1b--------------------:
 
 #  a) i) If we are to simply return the value of "sum" AFTER executing all
@@ -41,7 +42,6 @@ print(exercise_a(20))
 #        performed by this algorithm increases exponentially. Please run the
 #        following code below to see example outputs that support this
 #        hypothesis.
-
 
 def exercise_b(n):
     sum = 0
@@ -59,7 +59,7 @@ def exercise_b(n):
                     operation_counter += 1
                     l += 1
                     sum += 1 
-    return (f"If n = {n}; then total number of operations is: {operation_counter}")
+    return (f"If n = {n}; then the total number of operations is: {operation_counter}")
   
 print("\n Example Outputs for 'exercise_b()': \n-----------------------------------")
 print(exercise_b(1))   
