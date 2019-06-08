@@ -96,91 +96,40 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        #  1)  Determine if the robot's SORT mode light is on, which allows it to enter the SORT loop.
-        # print("Let's check to see if the robot's SORT mode light is even turned on, otherwise it can't begin to sort anything! \n")
-        # print("If the robot's SORT mode light is 'True', it can enter the SORT loop! \n")
-        # print("If the robot's SORT mode light is 'False', it CAN'T start sorting yet! \n")
-        # print("Robot's SORT mode light: ", self.light_is_on(), "\n")
-        # if self.light_is_on() == True:
-        #     #  2)  If the robot's SORT mode light is on, proceed to step 4.
-        #     pass
-        # else: 
-            #  3)  If the robot's SORT mode light is NOT on, turn it on to enter the SORT loop.
-            # print("Since the robot's SORT mode light isn't turned on yet, let's do that FIRST so it can enter the SORT loop! \n")
         self.set_light_on()
-        print("*******INITIAL turning on of the robot's SORT mode light: ", self.light_is_on())
-            # print("Now that the robot's SORT mode light is turned on, it can jump into the SORT loop! \n")
-        while self.light_is_on() == True:
-                #  4)  Turn off the robot's light to remain inside this SORT loop.
-                # print("Now that the robot has entered the SORT loop, let's turn off it's SORT mode light so that it can keep sorting in this loop! \n")
+        print("*******Beginning of the sort() function*********")
+        while self.light_is_on():
+            self.set_light_off()
             
-            #  5)  Determine if the robot can move left or right, which 
-            #      signifies where the robot is located in the list and 
-            #      whether there are still items to be sorted.
-            #  6a) If the robot can move left AND right, the robot is 
-            #      positioned somewhere in the middle of the list and 
-            #      may continue sorting.
-            #  6b) If the robot can only move LEFT, then the robot has 
-            #      reached the end of the list and can no longer sort.
-            #  6c) If the robot can only move RIGHT, this signifies 
-            #      that the robot is positioned at the beginning of the 
-            #      list (l[0]) and may continue sorting.
-            # print("Great! Now, let's figure out where the robot is located in the list! \n")
-            # print("The Robot's Current Ability to Move Left: ", self.can_move_left())
-            print("The Robot's Current Ability to Move Right: ", self.can_move_right(), "\n")
-            # print("In it's current position, if the robot can move, both, LEFT and RIGHT, it is positioned somewhere in the middle of the list! \n")
-            # print("However, if the robot can ONLY move to the LEFT, it is positioned at the FIRST index of the list! \n")
-            # print("But don't forget that that the robot can KEEP sorting in this list as long as it has the ability to move to the RIGHT! \n")
-            # print("And if the robot can ONLY move to the RIGHT, it is positioned at the LAST index of the list! \n")
+            if self.compare_item() == None:
+                self.swap_item()     
+                
             while self.can_move_right() == True:
-                self.set_light_off()
-                print("Robot's SORT mode light has been shut OFF because it entered the CAN_MOVE_RIGHT While loop!")
-                print("The robot's current position within the list: ", robot._position, "\n")
-                self.swap_item()
-                print(f"The robot has PICKED UP an item at the {robot._position} index! \n")
                 self.move_right()
-                print(f"The robot is NOW at the {robot._position} position within the list. \n")
-                    #  7)   To begin sorting, we must compare the value of the item
-                    #       in the robot's hand with the item in front of it. If a
-                    #       swap is performed, we will turn on the robot's SORT mode
-                    #       light to allow it to enter the SORT loop again.
-                    # print("Now that we know the robot is positioned at the FIRST index of the list, let's start sorting as we move to the RIGHT! \n")
-                    #  8a)  If the item in the robot's hand is GREATER than the item 
-                    #       in front of the robot, it will swap those two items and 
-                    #       then move LEFT to drop off the LESSER item at the previous 
-                    #       position.
+                
                 if self.compare_item() == 1:
-                    print("The robot was holding something GREATER than what was in front of it. SWAPPPPPPP! \n")
-                    self.swap_item()  
+                    self.swap_item() 
                     self.move_left()
+                    self.swap_item()
+                    self.move_right()
                     self.swap_item()
                     self.set_light_on()
-                    print("The robot's SORT mode light has been turned ON because of a GREATER to LESSER item SWAP + DROP OFF!")
-                    self.move_right()
-                    #  8c)  If the item in the robot's hand is EQUAL to the item in front
-                    #       of the robot, it will move RIGHT to the next position without
-                    #       swapping anything.
-                elif self.compare_item() == 0: 
+                    
+                elif self.compare_item() == -1 or self.compare_item() == 0:
                     self.move_left()
                     self.swap_item()
                     self.move_right()
-                elif self.compare_item() == -1: 
-                    self.move_left()
                     self.swap_item()
-                    self.move_right()
-                #  9)  When the robot reaches the end of the list and still has it's SORT mode light
-                #      on, the robot will keep moving LEFT, without sorting anything, until it is back 
-                #      to the FIRST index of the list again, where it will pass throughth the list for
-                #      another round of sorting again!
-                # print("Now that we know the robot is positioned at the LAST index of the list, let's have it return to the FIRST index to keep sorting! \n")
+
                 if self.can_move_right() == False:
-                    while self.can_move_left() == True and self.light_is_on() == True:
-                        self.move_left()                        
+                    self.swap_item()
+                    
+            while self.can_move_left() == True:
+                self.move_left() 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
-    # l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65]
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
 
     robot = SortingRobot(l)
