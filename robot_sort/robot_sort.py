@@ -108,7 +108,7 @@ class SortingRobot:
             #  3)  If the robot's SORT mode light is NOT on, turn it on to enter the SORT loop.
             # print("Since the robot's SORT mode light isn't turned on yet, let's do that FIRST so it can enter the SORT loop! \n")
         self.set_light_on()
-        print("Robot's SORT mode light has been turned on INITIALLY: ", self.light_is_on())
+        print("*******INITIAL turning on of the robot's SORT mode light: ", self.light_is_on())
             # print("Now that the robot's SORT mode light is turned on, it can jump into the SORT loop! \n")
         while self.light_is_on() == True:
                 #  4)  Turn off the robot's light to remain inside this SORT loop.
@@ -134,10 +134,12 @@ class SortingRobot:
             # print("And if the robot can ONLY move to the RIGHT, it is positioned at the LAST index of the list! \n")
             while self.can_move_right() == True:
                 self.set_light_off()
-                print("Robot's POWER light indicator: ", self.light_is_on(), "\n")
-                print(robot._position)
+                print("Robot's SORT mode light has been shut OFF because it entered the CAN_MOVE_RIGHT While loop!")
+                print("The robot's current position within the list: ", robot._position, "\n")
                 self.swap_item()
+                print(f"The robot has PICKED UP an item at the {robot._position} index! \n")
                 self.move_right()
+                print(f"The robot is NOW at the {robot._position} position within the list. \n")
                     #  7)   To begin sorting, we must compare the value of the item
                     #       in the robot's hand with the item in front of it. If a
                     #       swap is performed, we will turn on the robot's SORT mode
@@ -148,10 +150,12 @@ class SortingRobot:
                     #       then move LEFT to drop off the LESSER item at the previous 
                     #       position.
                 if self.compare_item() == 1:
+                    print("The robot was holding something GREATER than what was in front of it. SWAPPPPPPP! \n")
                     self.swap_item()  
                     self.move_left()
                     self.swap_item()
                     self.set_light_on()
+                    print("The robot's SORT mode light has been turned ON because of a GREATER to LESSER item SWAP + DROP OFF!")
                     self.move_right()
                     #  8c)  If the item in the robot's hand is EQUAL to the item in front
                     #       of the robot, it will move RIGHT to the next position without
@@ -169,8 +173,8 @@ class SortingRobot:
                 #      to the FIRST index of the list again, where it will pass throughth the list for
                 #      another round of sorting again!
                 # print("Now that we know the robot is positioned at the LAST index of the list, let's have it return to the FIRST index to keep sorting! \n")
-                if self.can_move_right() == False and self.light_is_on() == True:
-                    while self.can_move_left() == True:
+                if self.can_move_right() == False:
+                    while self.can_move_left() == True and self.light_is_on() == True:
                         self.move_left()                        
 
 if __name__ == "__main__":
