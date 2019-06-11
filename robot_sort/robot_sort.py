@@ -96,14 +96,63 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        #  Turns the robot's light ON to allow it to enter a SORT loop
+        self.set_light_on()
+        print("******* Beginning of the sort() function *********")
+        while self.light_is_on():
+            #  Turns the robot's light OFF because it has already entered the SORT loop
+            #  and also because we now want to use the light as an indicator that the 
+            #  robot made a swap to pick up an item in front of it that was LESS than
+            #  the item in its hands. It will then take this time LESSER item, move backwards
+            #  ONE space (to the LEFT), drop the item, move forwards ONE space, and then
+            #  pick up the originally LARGER-than object from before.
+            self.set_light_off()
+            
+            #  Tells the robot to pick up an item if it doesn't already have on it its hands
+            #  or tells the robot to drop an item if there isn't one in front of it.
+            if self.compare_item() == None:
+                self.swap_item()     
+                
+            #  Tells the robot to move to the RIGHT, one space, if it has the ability to do so.
+            while self.can_move_right() == True:
+                self.move_right()
+                
+                #  If the item in the robot's hands is GREATER than the item in front of the
+                #  robot, then the robot will make a swap, travel back one space (to the LEFT),
+                #  drop that item into the empty space, move forwards one space (to the RIGHT),
+                #  pick up the originally LARGER-than object that it swapped out earlier, and then
+                #  turn its light on to indicate that it made a swap.
+                if self.compare_item() == 1:
+                    self.swap_item() 
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+                    self.swap_item()
+                    self.set_light_on()
+                    
+                #  If the item in the robot's hands is LESS than or EQUAL to the item in front of it,
+                #  the robot will move backwards one space (to the LEFT), drop that LESS than or EQUAL
+                #  to object, move forwards one space (to the RIGHT), and then pick up the LARGER-than
+                #  item used in the last comparison.   
+                elif self.compare_item() == -1 or self.compare_item() == 0:
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+                    self.swap_item()
 
+                #  If the robot can no longer move to the right, this tells the robot to drop the item
+                #  that is currently in it's hands.
+                if self.can_move_right() == False:
+                    self.swap_item()
+                    
+            #  This tells the robot to keep moving LEFT, one space at a time, until it can no longer do so.
+            #  This will take the robot back to the beginning position of the list.
+            while self.can_move_left() == True:
+                self.move_left() 
 
 if __name__ == "__main__":
-    # Test our your implementation from the command line
+    # Test our your implementation from the command line 
     # with `python robot_sort.py`
-
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
 
     robot = SortingRobot(l)
